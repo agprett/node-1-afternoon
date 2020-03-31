@@ -2,7 +2,7 @@ const products = require('../products.json')
 
 module.exports = {
   products: (req, res) =>{
-    console.log(products)
+    res.status(200).send(products)
   },
 
   getProduct: (req, res) =>{
@@ -19,12 +19,9 @@ module.exports = {
 
   getProducts: (req, res) => {
     if(req.query.price) {
-      const filteredProducts = products.filter(e => {
-        return e.price >= +req.query.price
-      })
-      res.status(200).send(filteredProducts)
-    } else {
-      res.status(200).send(products)
+        const items = products.filter(e => e.price >= +req.query.price)
+        return res.status(200).send(items)
     }
+    res.status(200).send(products)
   }
 } 
